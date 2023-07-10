@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ public class InventoryService {
 
     @Autowired
     private final InventoryRepository inventoryRepository;
+
+   // @RequestMapping(value = "/api/inventory", method = RequestMethod.GET, produces="application/json")
     @Transactional(readOnly = true)
     @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> skuCode) {
