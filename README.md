@@ -6,6 +6,7 @@
 - Inter Process Communication	( WebConfig / RestTemplate )          	  - done
 - Service Discovery using Netflix  ( Eureka )    			  - done
 - Implement API Gateway using Spring Cloud Gateway		          - done
+
   
         .Routing based on Request Headers
 	.Authentication
