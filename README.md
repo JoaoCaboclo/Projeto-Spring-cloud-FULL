@@ -7,13 +7,7 @@
 - Service Discovery using Netflix  ( Eureka )    			  - done
 - Implement API Gateway using Spring Cloud Gateway		          - done
 
-        .Routing based on Request Headers
-	.Authentication
-	.Security
-	.Load Balance
-	.SSL Termination
-	.Rastreability ( log - trace - metricas )
-        .A single point of failure (SPOF)
+        .Routing based on Request Headers .Authentication .Security .Load Balance .SSL Termination .Rastreability (log - trace - metricas) .A single point of failure (SPOF)
   
 - Secure Microservices using Keycloak					   - to do
 - Implement Circuit Breaker						   - to do
