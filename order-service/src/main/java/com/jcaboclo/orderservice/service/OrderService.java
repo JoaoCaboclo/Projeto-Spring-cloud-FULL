@@ -26,7 +26,7 @@ public class OrderService {
     private final WebClient webClient;
 
 
-    public void placeHolder(OrderRequest orderRequest) {
+    public String placeHolder(OrderRequest orderRequest) {
 
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
@@ -50,16 +50,12 @@ public class OrderService {
                 .bodyToMono(InventoryResponse[].class)
                 .block();
 
-        // com lambda
-        //    inventoryResponse -> inventoryResponse.isInStock()
-        // com metodo referência
-        //    InventoryResponse::isInStock
-
         Boolean AllProductsInStock = Arrays.stream(inventoryResponsArray).allMatch(
                 InventoryResponse::isInStock);
 
         if (AllProductsInStock) {
             orderRepository.save(order);
+            return "Order placed successfully";
         } else {
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }

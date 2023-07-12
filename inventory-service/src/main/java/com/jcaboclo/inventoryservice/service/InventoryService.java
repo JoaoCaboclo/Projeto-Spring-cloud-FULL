@@ -21,11 +21,16 @@ public class InventoryService {
     @Autowired
     private final InventoryRepository inventoryRepository;
 
-   // @RequestMapping(value = "/api/inventory", method = RequestMethod.GET, produces="application/json")
     @Transactional(readOnly = true)
     @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> skuCode) {
-        log.info("Checking Inventory");
+
+        log.info("accessing Inventory");
+
+       // log.info("Wait started for accessing Inventory");
+       // Thread.sleep(10000);
+       // log.info("Wait ended");
+
         return inventoryRepository.findBySkuCodeIn(skuCode).stream()
                 .map(inventory ->
                         InventoryResponse.builder()
