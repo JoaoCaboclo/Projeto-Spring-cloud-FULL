@@ -5,6 +5,7 @@ import com.jcaboclo.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api/inventory")
 @RequiredArgsConstructor
 @Slf4j
+@RefreshScope
 public class InventoryController {
 
     @Autowired
