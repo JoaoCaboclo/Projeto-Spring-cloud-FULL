@@ -2,29 +2,53 @@ version: "3.8"
 
 services:
 
-  accounts:
-    image: eazybytes/accounts:latest
+  discovery-server:
+    image: jcaboclo/discovery-server:latest
+    ports:
+      - "8761:8761"
+    mem_limit: 700m
+    networks:
+      - jcaboclo-network
+
+  spring-cloud-config-server:
+    image: jcaboclo/spring-cloud-config-server:latest
+    mem_limit: 700m
+    ports:
+      - "8888:8888"
+    networks:
+      - jcaboclo-network
+
+  api-gateway:
+    image: jcaboclo/api-gateway:latest
     mem_limit: 700m
     ports:
       - "8080:8080"
     networks:
-      - eazybank-network
-    
-  loans:
-    image: eazybytes/loans:latest
+      - jcaboclo-network
+
+  inventory-service:
+    image: jcaboclo/inventory-service:latest
     mem_limit: 700m
     ports:
-      - "8090:8090"
+      - "8082:8082"
     networks:
-      - eazybank-network
+      - jcaboclo-network
     
-  cards:
-    image: eazybytes/cards:latest
+  product-service:
+    image: jcaboclo/product-service:latest
     mem_limit: 700m
     ports:
-      - "9000:9000"
+      - "8083:8083"
     networks:
-      - eazybank-network
+      - jcaboclo-network
+
+  order-service:
+    image: jcaboclo/order-service:latest
+    mem_limit: 700m
+    ports:
+      - "8081:8081"
+    networks:
+      - jcaboclo-network
     
 networks:
-  eazybank-network:
+  jcaboclo-network:
