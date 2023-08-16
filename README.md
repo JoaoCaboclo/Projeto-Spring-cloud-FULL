@@ -27,6 +27,11 @@
 	 docker build . -t jcaboclo/product-service
      docker build . -t jcaboclo/spring-cloud-config-server
 
+Para rodar os arquivos docker, o docker desktop deverá estar iniciado no seu ambiente
+   docker-compose.yml
+   na mesma pasta deste arquivo, utilizer o comando
+      Docker-compose up
+
 Referência e fonte do meu aprendizado: Programming Techie
        Spring Boot Microservice Project Full Course in 6 Hours
              https://www.youtube.com/watch?v=mPPhcU7oWDU

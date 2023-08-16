@@ -17,6 +17,7 @@ import java.util.List;
 @RefreshScope
 public class InventoryController {
 
+
     @Autowired
     private final InventoryService inventoryService;
 

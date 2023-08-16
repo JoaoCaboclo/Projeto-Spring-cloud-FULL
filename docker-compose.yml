@@ -2,17 +2,89 @@ version: "3.8"
 
 services:
 
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - jcaboclo-network
+  kafka:
+      image: docker.io/bitnami/kafka:3.4
+      ports:
+        - "9092:9092"
+      volumes:
+        - "kafka_data:/bitnami"
+      environment:
+        - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+        - KAFKA_CFG_NODE_ID=0
+        - KAFKA_CFG_PROCESS_ROLES=controller,broker
+        - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@<your_host>:9093
+        - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+        - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+        - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+        - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      depends_on:
+        - zookeeper
+      networks:
+        - jcaboclo-network
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8787:8787
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: renatogroffe
+      ME_CONFIG_BASICAUTH_PASSWORD: MongoExpress2019!
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: MongoDB2019!
+    links:
+     - mongo
+    networks:
+     - jcaboclo-network
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: MongoDB2019!
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/renatogroffe/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+    networks:
+      - jcaboclo-network
+
+  db:
+      container_name: mysql8
+      image: mysql:8.0
+      command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: sandbox
+        #      MYSQL_USER: sandbox_user
+        #      MYSQL_PASSWORD: passpass
+        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      ports:
+        - '3306:3306'
+      volumes:
+        - './docker/db/data:/var/lib/mysql'
+        - './docker/db/my.cnf:/etc/mysql/conf.d/my.cnf'
+        - './docker/db/sql:/docker-entrypoint-initdb.d'
+
   discovery-server:
     image: jcaboclo/discovery-server:latest
     ports:
       - "8761:8761"
-    mem_limit: 700m
     networks:
       - jcaboclo-network
 
   spring-cloud-config-server:
     image: jcaboclo/spring-cloud-config-server:latest
-    mem_limit: 700m
     ports:
       - "8888:8888"
     networks:
@@ -20,35 +92,38 @@ services:
 
   api-gateway:
     image: jcaboclo/api-gateway:latest
-    mem_limit: 700m
     ports:
-      - "8080:8080"
+      - "8090:8090"
     networks:
       - jcaboclo-network
 
   inventory-service:
     image: jcaboclo/inventory-service:latest
-    mem_limit: 700m
+
     ports:
       - "8082:8082"
     networks:
       - jcaboclo-network
     
+  order-service:
+    image: jcaboclo/order-service:latest
+    ports:
+      - "8081:8081"
+    networks:
+      - jcaboclo-network
+
   product-service:
     image: jcaboclo/product-service:latest
-    mem_limit: 700m
     ports:
       - "8083:8083"
     networks:
       - jcaboclo-network
 
-  order-service:
-    image: jcaboclo/order-service:latest
-    mem_limit: 700m
-    ports:
-      - "8081:8081"
-    networks:
-      - jcaboclo-network
-    
 networks:
   jcaboclo-network:
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: bridge
