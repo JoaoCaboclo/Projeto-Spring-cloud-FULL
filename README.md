@@ -1,15 +1,14 @@
 # Projeto-Spring-cloud-FULL
 
-
-
 - Build Services  ( Mysql e MongoDB )			            	  - done
 - Inter Process Communication	( WebConfig / RestTemplate )      - done
 - Service Discovery using Netflix  ( Eureka )    			      - done
+- Spring cloud Config-server                                      - done
 - Implement API Gateway using Spring Cloud Gateway		          - done
 -     Routing based on Request Headers .Authentication .Security .Load Balance
 -     SSL Termination .Rastreability (log - trace - metricas) .A single point of failure (SPOF)
 - Secure Microservices using Keycloak					          - done
-- Implement Circuit Breaker						                  - done
+- Implement Circuit Breaker (configurado no github e acessado pelo config-server)						                  - done
 -     Resilience / Resiliency  (Resilience4J)
 -     Testando: Inventory-service fora do ar
 -               Inventory-service demorando a responder (alta latencia)

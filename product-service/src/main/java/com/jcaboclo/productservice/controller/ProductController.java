@@ -18,6 +18,7 @@ public class ProductController {
 
     @Autowired
     private final ProductService productService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody ProductRequest productRequest){
