@@ -13,18 +13,18 @@
 -     Testando: Inventory-service fora do ar
 -               Inventory-service demorando a responder (alta latencia)
 -               Retentativas para tornar o sistema mais robusto e resiliente
+- Conteinerização dos Micro serviços : Docker                    - done
+      - Gerando as imagens docker apos ter buildado a aplicação ( gerados os .jar )
+        docker build . -t jcaboclo/discovery-server
+        docker build . -t jcaboclo/inventory-service
+        docker build . -t jcaboclo/order-service
+        docker build . -t jcaboclo/product-service
+        docker build . -t jcaboclo/spring-cloud-config-server
 - Implement Distributed Tracing						              - to do
 - Event Driven Architecture using Kafka					          - to do
-- Dockerize the application						                  - to do
 - Monitoring Microservices using Prometheus and Grafana           - to do
 
-- Conteinerização dos Micro serviços : Docker
-- Gerando as imagens docker apos ter buildado a aplicação ( gerados os .jar )
-     docker build . -t jcaboclo/discovery-server
-	 docker build . -t jcaboclo/inventory-service
-	 docker build . -t jcaboclo/order-service
-	 docker build . -t jcaboclo/product-service
-     docker build . -t jcaboclo/spring-cloud-config-server
+
 
 Para rodar os arquivos docker, o docker desktop deverá estar iniciado no seu ambiente
    docker-compose.yml
