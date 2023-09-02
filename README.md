@@ -1,5 +1,12 @@
 # Projeto-Spring-cloud-FULL
 
+        Estudos e Pesquisas do João Caboclo da S. Filho
+        Adicionei esta documentação para ajudar na compreensão e desenvolvimento do projeto
+        Espero que te ajude a evoluir, assim como ajudou-me!!!!
+        Setembro de 2023 - Uberlândia/Minas gerais/Brasil
+
+        Vídeo curso base do aprendizado: https://www.youtube.com/watch?v=mPPhcU7oWDU
+
 - Build Services  ( Mysql e MongoDB )			            	  - done
 - Inter Process Communication	( WebConfig / RestTemplate )      - done
 - Service Discovery using Netflix  ( Eureka )    			      - done
@@ -24,13 +31,9 @@
 - Event Driven Architecture using Kafka					          - to do
 - Monitoring Microservices using Prometheus and Grafana           - to do
 
-
-
 Para rodar os arquivos docker, o docker desktop deverá estar iniciado no seu ambiente
    docker-compose.yml
    na mesma pasta deste arquivo, utilizer o comando
       Docker-compose up
 
-Referência e fonte do meu aprendizado: Programming Techie
-       Spring Boot Microservice Project Full Course in 6 Hours
-             https://www.youtube.com/watch?v=mPPhcU7oWDU
+
